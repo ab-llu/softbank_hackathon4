@@ -1,0 +1,18 @@
+options:
+  machineType: 'E2_HIGHCPU_8'
+
+steps:
+# 依存関係のインストール
+- name: 'python:3.8'
+  entrypoint: 'bash'
+  args: 
+  - '-c'
+  - |
+    pip install torch==2.1.0+cpu torchvision==0.16.0+cpu torchaudio==2.1.0 -f https://download.pytorch.org/whl/torch_stable.html
+    pip install -r requirements.txt
+    pip install git+https://github.com/facebookresearch/detectron2.git
+
+# その他必要なビルドステップ
+# 例: アプリケーションのデプロイ
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']

@@ -1,0 +1,13 @@
+runtime: custom
+env: flex
+
+manual_scaling:
+  instances: 1  # インスタンス数を指定
+
+resources:
+  cpu: 1
+  memory_gb: 2  # 必要に応じてメモリサイズを調整
+  disk_size_gb: 10  # 必要に応じてディスクサイズを調整
+
+env_variables:
+  FLASK_ENV: "production"
