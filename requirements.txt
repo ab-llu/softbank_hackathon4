@@ -63,7 +63,7 @@ tensorflow-intel
 tensorflow-io-gcs-filesystem==0.31.0
 tomli==2.0.1
 tqdm==4.66.2
-typing-extensions==4.10.0
+typing-extensions
 urllib3==2.2.1
 werkzeug==3.0.1
 yacs==0.1.8
