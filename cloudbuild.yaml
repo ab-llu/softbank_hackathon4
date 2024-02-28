@@ -1,9 +1,8 @@
-options:
-  logsBucket: 'abllu-softbank-hackathon'
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/omega-portal-415507/softbank-hackathon4', '.']
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args: ['run', 'deploy', 'softbank-hackathon4', '--image', 'gcr.io/omega-portal-415507/softbank-hackathon4', '--region', 'us-central1']
+logsBucket: 'gs://abllu-softbank-hackathon'
 images:
 - 'gcr.io/omega-portal-415507/softbank-hackathon4'
