@@ -12,8 +12,11 @@ RUN pip install gdown
 # 作業ディレクトリの設定
 WORKDIR /app
 
+# モデルファイルを保存するディレクトリの作成
+RUN mkdir -p model
+
 # Google Driveからモデルファイルをダウンロード
-RUN gdown --id '1TxLPwCDtDkvYCpGXk34uKvb7TJalzJZN' -O model/tooth_and_plaque.pth && \
+RUN gdown 'https://drive.google.com/uc?id=1TxLPwCDtDkvYCpGXk34uKvb7TJalzJZN' -O model/tooth_and_plaque.pth && \
     # ファイルの存在とサイズを確認
     if [ -f model/tooth_and_plaque.pth ]; then \
         echo "tooth_and_plaque.pth has been successfully downloaded."; \
