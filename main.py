@@ -57,7 +57,13 @@ cfg.MODEL.DEVICE = "cpu"
 cfg.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = 128
 cfg.MODEL.ROI_HEADS.NUM_CLASSES = 3
 
-cfg.MODEL.WEIGHTS = "model/tooth_and_plaque.pth"
+rcnn_model_path = 'model/tooth_and_plaque.pth'
+# ファイルが存在するかチェック
+if os.path.exists(rcnn_model_path):
+    print(f"{rcnn_model_path} exists.")
+else:
+    print(f"Error: {rcnn_model_path} does not exist.")
+cfg.MODEL.WEIGHTS = rcnn_model_path
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set a custom testing threshold
 thing_classes = ["plaque", "plaque", "tooth"]
 predictor = DefaultPredictor(cfg)
