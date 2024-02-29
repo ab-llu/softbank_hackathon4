@@ -42,5 +42,3 @@ EXPOSE 8080
 
 # アプリケーションの起動コマンド
 CMD ["gunicorn", "-b", ":8080", "main:app"]
-
-https://drive.google.com/file/d/1TxLPwCDtDkvYCpGXk34uKvb7TJalzJZN/view?usp=sharing
