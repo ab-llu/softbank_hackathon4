@@ -4,6 +4,18 @@ steps:
 - name: 'gcr.io/omega-portal-415507/git-lfs-image'
   args: ['lfs', 'pull']
   dir: 'softbank_hackathon4'
+- name: 'ubuntu'
+  entrypoint: '/bin/bash'
+  args:
+  - '-c'
+  - |
+    if [ -f "softbank_hackathon4/model/tooth_and_plaque.pth" ]; then
+        echo "tooth_and_plaque.pth exists."
+        ls -lh "softbank_hackathon4/path/to/tooth_and_plaque.pth"
+    else
+        echo "tooth_and_plaque.pth does not exist."
+        exit 1
+    fi
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/omega-portal-415507/softbank-hackathon4:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
