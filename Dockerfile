@@ -3,14 +3,16 @@ FROM python:3.8
 
 # OSパッケージの更新と必要なライブラリのインストール
 RUN apt-get update && \
-    apt-get install -y \
-    libgl1-mesa-glx \
-    git-lfs \
-    && git lfs install \
-    && rm -rf /var/lib/apt/lists/*
+    apt-get install -y libgl1-mesa-glx git git-lfs && \
+    git lfs install && \
+    rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリの設定
 WORKDIR /app
+
+# GitリポジトリのクローンとGit LFSファイルの取得
+RUN git clone https://github.com/ab-llu/softbank_hackathon4.git . && \
+    git lfs pull
 
 # 依存関係ファイルのコピー
 COPY requirements.txt /app/
