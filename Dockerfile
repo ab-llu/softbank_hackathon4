@@ -2,8 +2,11 @@
 FROM python:3.8
 
 # OSパッケージの更新と必要なライブラリのインストール
-RUN apt-get update \
-    && apt-get install -y libgl1-mesa-glx \
+RUN apt-get update && \
+    apt-get install -y \
+    libgl1-mesa-glx \
+    git-lfs \
+    && git lfs install \
     && rm -rf /var/lib/apt/lists/*
 
 # 作業ディレクトリの設定
