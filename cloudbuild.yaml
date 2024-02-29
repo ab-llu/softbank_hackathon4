@@ -11,7 +11,7 @@ steps:
   - |
     if [ -f "softbank_hackathon4/model/tooth_and_plaque.pth" ]; then
         echo "tooth_and_plaque.pth exists."
-        ls -lh "softbank_hackathon4/path/to/tooth_and_plaque.pth"
+        ls -lh "softbank_hackathon4/model/tooth_and_plaque.pth"
     else
         echo "tooth_and_plaque.pth does not exist."
         exit 1
