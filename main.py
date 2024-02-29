@@ -61,9 +61,9 @@ rcnn_model_path = 'model/tooth_and_plaque.pth'
 # ファイルが存在するかチェック
 if os.path.exists(rcnn_model_path):
     print(f"{rcnn_model_path} exists.")
-    with open(rcnn_model_path, 'r') as file:
-        first_line = file.readline()
-        print(first_line)
+    # with open(rcnn_model_path, 'r') as file:
+    #     first_line = file.readline()
+    #     print(first_line)
 else:
     print(f"Error: {rcnn_model_path} does not exist.")
 cfg.MODEL.WEIGHTS = rcnn_model_path
