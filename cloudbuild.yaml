@@ -11,9 +11,16 @@ steps:
   - |
     if [ -f "softbank_hackathon4/model/tooth_and_plaque.pth" ]; then
         echo "tooth_and_plaque.pth exists."
-        ls -lh "softbank_hackathon4/model/tooth_and_plaque.pth"
+        # ファイルがGit LFSポインタかどうかをチェック
+        if head -n 1 "softbank_hackathon4/model/tooth_and_plaque.pth" | grep -q '^version https://git-lfs.github.com/spec/v1'; then
+            echo "Error: tooth_and_plaque.pth is a Git LFS pointer."
+            exit 1
+        else
+            echo "tooth_and_plaque.pth is not a Git LFS pointer."
+            ls -lh "softbank_hackathon4/model/tooth_and_plaque.pth"
+        fi
     else
-        echo "tooth_and_plaque.pth does not exist."
+        echo "Error: tooth_and_plaque.pth does not exist."
         exit 1
     fi
 - name: 'gcr.io/cloud-builders/docker'
