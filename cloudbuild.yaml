@@ -1,7 +1,7 @@
 steps:
-- name: 'gcr.io/cloud-builders/git'
+- name: 'gcr.io/omega-portal-415507/git-lfs-image'
   args: ['clone', 'https://github.com/ab-llu/softbank_hackathon4.git']
-- name: 'gcr.io/cloud-builders/git'
+- name: 'gcr.io/omega-portal-415507/git-lfs-image'
   args: ['lfs', 'pull']
   dir: 'softbank_hackathon4'
 - name: 'gcr.io/cloud-builders/docker'
