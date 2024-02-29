@@ -11,6 +11,9 @@ steps:
   - |
     if [ -f "softbank_hackathon4/model/tooth_and_plaque.pth" ]; then
         echo "tooth_and_plaque.pth exists."
+        # ファイルの最初の行を出力
+        first_line=$(head -n 1 "softbank_hackathon4/model/tooth_and_plaque.pth")
+        echo "First line of tooth_and_plaque.pth: $first_line"
         # ファイルがGit LFSポインタかどうかをチェック
         if head -n 1 "softbank_hackathon4/model/tooth_and_plaque.pth" | grep -q '^version https://git-lfs.github.com/spec/v1'; then
             echo "Error: tooth_and_plaque.pth is a Git LFS pointer."
