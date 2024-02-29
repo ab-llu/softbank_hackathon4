@@ -1,3 +1,4 @@
+steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/omega-portal-415507/softbank-hackathon4:latest', '.']
 - name: 'gcr.io/cloud-builders/docker'
