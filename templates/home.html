@@ -36,9 +36,9 @@
                             <img src="static/toothbrush.png">
                             {% for time in display[day].keys() %}
                                 {% if display[day][time] == None %}
-                                    <a href="/upload_folder?day={{ day }}&time={{ time }}" class="toothbrush-part"></a>
+                                    <a href="/upload_folder?day={{ day }}&time={{ time }}" title="新規登録" class="toothbrush-part"></a>
                                 {% else %}
-                                    <a href="/record?data={{ display[day][time]['json'] }}" class="{% if display[day][time]['point'] <= 82 %}toothbrush-part red{% elif display[day][time]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
+                                    <a href="/record?data={{ display[day][time]['json'] }}" title="記録を確認" class="{% if display[day][time]['point'] <= 82 %}toothbrush-part red{% elif display[day][time]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
                                 {% endif %}
                             {% endfor %}
                         </div>

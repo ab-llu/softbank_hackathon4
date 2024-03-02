@@ -10,19 +10,19 @@
         <h1 class="upload-title">画像を選択してください</h1>
         <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
             <label>画像を選択:</label>
-            <input type="file" name="image" onchange="previewFile()" class="input-file">
+            <input type="file" name="image" onchange="previewFile()" class="input-file" required>
             
+            <input type="submit" value="アップロード" class="submit-btn"><br>
+
             <label>日付:</label>
-            <input type="date" id="dateInput" name="date" required><br>
+            <input type="date" id="dateInput" name="date" required>
             
             <label>時間帯:</label>
             <select name="time_of_day" id="timeInput" required>
                 <option value="morning">朝</option>
                 <option value="afternoon">昼</option>
                 <option value="evening">夜</option>
-            </select><br> 
-                       
-            <input type="submit" value="アップロード" class="submit-btn">
+            </select>           
         </form>
         <div id="preview-container">
             <div class="preview-placeholder"></div>
