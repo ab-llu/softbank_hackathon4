@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="home_body">
+        <div class="sidebar">
+            <a href="#">ホーム</a>
+            <a href="#">ページ2</a>
+            <a href="#">ページ3</a>
+        </div>
+        <div class="home_content">
+            <div class="top-right">
+                <h3>{{ date }}</h3>
+                <h3><a href="{{ url_for('logout') }}">ログアウト</a></h3>
+            </div>
+            <h1>Smile Savvy</h1>
+            <div class="toothbrush-container">
+                <div class="day_container">
+                    <div class="date transparent"><h3>2024-03-01</h3></div>
+                    <div class="toothbrush">
+                        <box class="label_morning"><h3>朝</h3></box>
+                        <box class="label_afternoon"><h3>昼</h3></box>
+                        <box class="label_evening"><h3>夜</h3></box>
+                    </div>
+                </div>
+            </div>
+            <div class="toothbrush-container">
+                {% for day in display.keys() %}
+                    <div class="day_container">
+                        <div class="date"><h3>{{ day }}</h3></div>
+                        <div class="toothbrush">
+                            <img src="static/toothbrush.png">
+                            {% for time in display[day].keys() %}
+                                {% if display[day][time] == None %}
+                                    <a href="/upload_folder?day={{ day }}&time={{ time }}" class="toothbrush-part"></a>
+                                {% else %}
+                                    <a href="/record?data={{ display[day][time]['json'] }}" class="{% if display[day][time]['point'] <= 82 %}toothbrush-part red{% elif display[day][time]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3><a href="{{ url_for('upload_form') }}" class="link">新規画像を登録</a></h3>
+        </div>
+    </div>
+</body>
+</html>

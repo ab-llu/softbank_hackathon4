@@ -12,6 +12,7 @@ contourpy==1.1.1
 cycler==0.12.1
 filelock==3.13.1
 flask==3.0.2
+flask_login
 fonttools==4.49.0
 fsspec==2024.2.0
 fvcore==0.1.5.post20221221

@@ -9,7 +9,19 @@
     <div class="content">
         <h1 class="upload-title">画像を選択してください</h1>
         <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+            <label>画像を選択:</label>
             <input type="file" name="image" onchange="previewFile()" class="input-file">
+            
+            <label>日付:</label>
+            <input type="date" id="dateInput" name="date" required><br>
+            
+            <label>時間帯:</label>
+            <select name="time_of_day" id="timeInput" required>
+                <option value="morning">朝</option>
+                <option value="afternoon">昼</option>
+                <option value="evening">夜</option>
+            </select><br> 
+                       
             <input type="submit" value="アップロード" class="submit-btn">
         </form>
         <div id="preview-container">
@@ -42,6 +54,20 @@
                 placeholder.style.display = 'block';
             }
         }
+
+        const day = "{{ day }}";
+        const time = "{{ time }}";
+
+        // ページが読み込まれたときに実行
+        document.addEventListener('DOMContentLoaded', function() {
+        // 'day'と'time'が有効な値であれば、inputのvalueに設定
+            if (day) {
+                document.getElementById('dateInput').value = day;
+            }
+            if (time) {
+                document.getElementById('timeInput').value = time;
+            }
+        });
     </script>
 </body>
 </html>

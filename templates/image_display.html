@@ -2,22 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Processed Image</title>
+    <title>Record</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1 class="processed-title">おくちの健康状態</h1>
-        <img src="{{ image_url }}" alt="Processed image" class="processed-image">
+        <img src="{{ data['url'] }}" alt="Processed image" class="processed-image">
         <div class="result-text">
             <p>緑色の部分が歯垢です。しっかり磨きましょう。</p>
             <div>
-                <h4>歯垢の割合 : {{ plaque_pro }} %</h4>
-                <h4>点数：20点</h4>
-                <h4>"{{ inflammation }}"</h4>
+                <h4>歯垢の割合 : {{ data['plaque'] }} %</h4>
+                <h4>点数：{{ data['point'] }}点</h4>
+                {% if data['inflammation'] == 0 %}
+                    <h4>炎症あり</h4>
+                {% else %}
+                    <h4>炎症なし</h4>
+                {% endif %} 
             </div>
         </div>
-        <a href="/" class="another-image-link">やり直す</a>
+        <a href="{{ url_for('upload_form') }}" class="another-image-link">やり直す</a>
+        <a href="{{ url_for('home') }}" class="link">ホームに戻る</a>
     </div>
 </body>
 </html>
