@@ -27,7 +27,18 @@
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
-            <a href="{{ url_for('upload_form') }}" class="link">新規画像を登録</a>
+            <div class="chat-container">
+                <div class="chat-messages">
+                    <!-- メッセージ例 -->
+                    <div class="message user">こんにちは！</div>
+                    <div class="message bot">こんにちは、何かお手伝いできることはありますか？</div>
+                    <!-- 他のメッセージ -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="メッセージを入力..." />
+                    <button>送信</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>

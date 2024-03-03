@@ -16,8 +16,24 @@ body {
 }
 
 .home_content{
-    margin-left: 300px; /* サイドバーの幅に応じて調整 */
+    margin-left: 160px; /* サイドバーの幅に応じて調整 */
+    padding: 0 20px 20px 20px;
     text-align: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    margin: 0;
+}
+
+.header h1{
+    margin: 0 auto;
 }
 
 .link {
@@ -33,18 +49,52 @@ body {
 
 .sidebar{
     position: fixed;
-    width: 200px;
+    width: 140px;
     height: 100%;
-    background-color: #f0f0f5;
-    padding: 20px;
-    margin-left: 0;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    background-color: #34495e;
+    color: white;
+    padding: 0px 20px 20px 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
 }
 
-.top-right {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+.sidebar div{
+    display: block;
+    margin-top: 50px;
+}
+
+.sidebar div a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #4a6572;
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 40px;
+    width: 80px;
+}
+
+.user-info h4, .user-info a {
+    margin: 0; /* 余白をリセット */
+    padding: 0 0 5px 0; /* 適度なパディング */
+    color: white; /* 文字色を白に */
+    text-decoration: none; /* 下線を消す */
+    font-size: 15px;
+}
+
+.user-info a:hover {
+    text-decoration: underline; /* ホバー時に下線を表示 */
 }
 
 .content {
@@ -166,6 +216,10 @@ body {
 }
 
 .toothbrush-container{
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: - 2px 4px rgba(0,0,0,0.1);
     margin: auto;
     width: fit-content;
 }
@@ -227,4 +281,87 @@ body {
 .date{
     top: 40%;
     margin-top: 40px;
+}
+
+#calendar {
+    max-width: 80%;
+    margin: auto;
+    min-height: 400px;
+}
+
+#popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#popup-content {
+    background-color: rgba(255, 255, 255, 1);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.chat-container {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.user {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    margin-left:38%;
+    width: 60%;
+}
+
+.bot {
+    align-self: flex-start;
+    background-color: #e9e9eb;
+    color: black;
+    width: 60%;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-input button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

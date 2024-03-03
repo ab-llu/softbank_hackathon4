@@ -54,6 +54,7 @@ def login():
     if request.method == 'POST':
         # ログイン処理（ここでは仮の処理を行います）
         user_id = request.form.get('user_id')
+        session['user'] = user_id
         user = User(user_id)
         login_user(user)
         return redirect(url_for('home'))
@@ -82,6 +83,14 @@ def logout():
 def home():
     now = datetime.now()
     date_string = now.strftime("%Y年%m月%d日")
+    return render_template('home.html', date=date_string, user=session['user'])
+
+#記録
+@app.route('/record_list')
+@login_required
+def record_list():
+    now = datetime.now()
+    date_string = now.strftime("%Y年%m月%d日")
     today = now.strftime("%Y-%m-%d")
     yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
     day_before_yesterday = (now - timedelta(days=2)).strftime("%Y-%m-%d")
@@ -95,7 +104,39 @@ def home():
                 display[day][time_of_day]['json'] = json.dumps(session['points'][time_label])
             else:
                 display[day][time_of_day] = None
-    return render_template('home.html', points = session['points'], date=date_string, display=display)
+    return render_template('record_list.html', points = session['points'], date=date_string, display=display, user=session['user'])
+
+#歯科予約
+@app.route('/reserve')
+@login_required
+def reserve():
+    now = datetime.now()
+    date_string = now.strftime("%Y年%m月%d日")
+    return render_template('reserve.html', date=date_string, user=session['user'])
+
+#チャット
+@app.route('/chat')
+@login_required
+def chat():
+    now = datetime.now()
+    date_string = now.strftime("%Y年%m月%d日")
+    return render_template('chat.html', date=date_string, user=session['user'])
+
+#歯周病を知る
+@app.route('/learn')
+@login_required
+def learn():
+    now = datetime.now()
+    date_string = now.strftime("%Y年%m月%d日")
+    return render_template('learn.html', date=date_string, user=session['user'])
+
+#設定
+@app.route('/setting')
+@login_required
+def setting():
+    now = datetime.now()
+    date_string = now.strftime("%Y年%m月%d日")
+    return render_template('setting.html', date=date_string, user=session['user'])
 
 #画像アップロードページ
 @app.route('/upload_folder')
