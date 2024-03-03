@@ -3,6 +3,7 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import shutil
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input, decode_predictions
@@ -249,7 +250,8 @@ cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set a custom testing threshold
 thing_classes = ["plaque", "plaque", "tooth"]
 predictor = DefaultPredictor(cfg)
 
-loaded_model = load_model("model/model.h5")
+# loaded_model = load_model("model/model.h5")
+loaded_model = tf.saved_model.load("model/model.h5_ver2.0")
 
 def process_image(image_path):
     from detectron2.utils.visualizer import ColorMode
@@ -297,7 +299,8 @@ def process_image(image_path):
     img_array = image.img_to_array(img_i)
     img_array = np.expand_dims(img_array, axis=0)
     img_array = preprocess_input(img_array)
-    predictions = loaded_model.predict(img_array)
+    # predictions = loaded_model.predict(img_array)
+    predictions = loaded_model(img_array)
     predicted_class = int(np.argmax(predictions)) #0: '炎症あり', 1: '炎症なし'
 
     return [masked_im_path, plaque_pro, predicted_class]

@@ -14,7 +14,7 @@
                 <a href="/record_list">記録</a>
                 <a href="/reserve">歯科予約</a>
                 <a href="/chat">チャット</a>
-                <a href="/learn">歯周病を知る</a>
+                <a href="/learn" class="active">歯周病を知る</a>
                 <a href="/setting">設定</a>
             </div>
         </div>
@@ -26,6 +26,32 @@
                     <h4>{{ user }}</h4>
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
+            </div>
+            <h1>歯周病について</h1>
+            <div class="learn_content">
+                <section>
+                    <h2>歯周病とは?</h2>
+                    <p>歯周病は、歯を支える組織に炎症が起きる病気です。初期段階では「歯肉炎」と呼ばれ、進行すると「歯周炎」に至ります。</p>
+                    <img src="static/images/gum_disease.jpg" alt="歯周病の影響">
+                </section>
+                
+                <section>
+                    <h2>原因</h2>
+                    <p>主な原因はプラーク（歯垢）の蓄積によるもので、適切な口腔衛生が行われないと細菌が増殖し炎症を引き起こします。</p>
+                    <img src="static/images/plaque_buildup.jpg" alt="プラークの蓄積">
+                </section>
+                
+                <section>
+                    <h2>予防方法</h2>
+                    <p>日々の正しい歯磨き、定期的な歯科検診、プロのクリーニングを受けることで予防できます。</p>
+                    <img src="static/images/prevention_methods.jpg" alt="予防方法">
+                </section>
+                
+                <section>
+                    <h2>治療方法</h2>
+                    <p>治療は病状に応じて異なりますが、初期段階ではスケーリングやルートプレーニングが行われます。</p>
+                    <img src="static/images/treatment_options.jpg" alt="治療方法">
+                </section>
             </div>
         </div>
     </div>

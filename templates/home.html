@@ -10,7 +10,7 @@
         <div class="sidebar">
             <h3>{{ date }}</h3>
             <div>
-                <a href="/home">ホーム</a>
+                <a href="/home" class="active">ホーム</a>
                 <a href="/record_list">記録</a>
                 <a href="/reserve">歯科予約</a>
                 <a href="/chat">チャット</a>
@@ -27,7 +27,19 @@
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
-            <a href="{{ url_for('upload_form') }}" class="link">新規画像を登録</a>
+            <div class="main-content">
+                <h2>ようこそ、{{ user }}さん！</h2>
+                <p>SmileSavvyであなたのオーラルケアをサポートしましょう。</p>
+                <div class="actions">
+                    <a href="{{ url_for('upload_form') }}" class="link">新規画像を登録</a>
+                    <a href="{{ url_for('record_list') }}" class="link">歯磨き記録を見る</a>
+                </div>
+                <!-- 追加の情報やリンク -->
+                <div class="additional-info">
+                    <h3>今日の歯磨きtips：</h3>
+                    <p>歯磨きは、少なくとも一日二回、各回2分間を目安にしましょう。</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>

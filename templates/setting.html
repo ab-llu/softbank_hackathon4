@@ -15,7 +15,7 @@
                 <a href="/reserve">歯科予約</a>
                 <a href="/chat">チャット</a>
                 <a href="/learn">歯周病を知る</a>
-                <a href="/setting">設定</a>
+                <a href="/setting" class="active">設定</a>
             </div>
         </div>
         <div class="home_content">
@@ -38,6 +38,7 @@
             </div>
             <div class="goal-setting">
                 <h3>目標設定</h3>
+                <p>目標が３回未満のときは、「なし」を選択してください</p>
                 <form action="/setting" method="post">
                     <div>
                         <label for="first_brush">1回目の歯磨き時間:</label>
@@ -73,7 +74,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <input type="submit" value="記録">
+                    <input type="submit" value="保存" class="link">
                 </form>
             </div>
         </div>
