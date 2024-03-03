@@ -7,6 +7,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    font-size: 20px;
 }
 
 .home_body{
@@ -16,7 +17,7 @@ body {
 }
 
 .home_content{
-    margin-left: 160px; /* サイドバーの幅に応じて調整 */
+    margin-left: 200px; /* サイドバーの幅に応じて調整 */
     padding: 0 20px 20px 20px;
     text-align: center;
 }
@@ -29,6 +30,7 @@ body {
     color: white;
     padding: 10px;
     width: 100%;
+    height: 80px;
     margin: 0;
 }
 
@@ -49,7 +51,7 @@ body {
 
 .sidebar{
     position: fixed;
-    width: 140px;
+    width: 180px;
     height: 100%;
     background-color: #34495e;
     color: white;
@@ -81,16 +83,16 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    height: 40px;
-    width: 80px;
+    height: 80px;
+    width: 160px;
 }
 
 .user-info h4, .user-info a {
     margin: 0; /* 余白をリセット */
-    padding: 0 0 5px 0; /* 適度なパディング */
+    padding: 5px 0 5px 0; /* 適度なパディング */
     color: white; /* 文字色を白に */
     text-decoration: none; /* 下線を消す */
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .user-info a:hover {
@@ -310,7 +312,7 @@ body {
 
 .chat-container {
     width: 100%;
-    height: 600px;
+    height: 450px;
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
@@ -331,17 +333,27 @@ body {
 
 .user {
     align-self: flex-end;
-    background-color: #007bff;
+    background-color: #5ca7f7;
     color: white;
-    margin-left:38%;
+    margin-left:auto;
+    margin-right: 2%;
     width: 60%;
+    text-align: right;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: fit-content;
 }
 
 .bot {
     align-self: flex-start;
-    background-color: #e9e9eb;
+    background-color: #d3d3db;
     color: black;
     width: 60%;
+    text-align: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: 2%;
+    width: fit-content;
 }
 
 .chat-input {

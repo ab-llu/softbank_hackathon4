@@ -86,16 +86,25 @@ def home():
     return render_template('home.html', date=date_string, user=session['user'])
 
 #記録
-@app.route('/record_list')
+@app.route('/record_list', methods=['GET', 'POST'])
 @login_required
 def record_list():
     now = datetime.now()
     date_string = now.strftime("%Y年%m月%d日")
-    today = now.strftime("%Y-%m-%d")
-    yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
-    day_before_yesterday = (now - timedelta(days=2)).strftime("%Y-%m-%d")
+    day_length = request.form.get('length', default=None, type=str) #フォームからとる
+    print(day_length)
+    if day_length is None:
+        day_length = 3
+    else:
+        day_length = int(day_length)
+    days = []
+    for i in range(day_length):
+        days.append((now - timedelta(days=i)).strftime("%Y-%m-%d"))
+    # today = now.strftime("%Y-%m-%d")
+    # yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
+    # day_before_yesterday = (now - timedelta(days=2)).strftime("%Y-%m-%d")
     display = {} #ホーム画面表示用データ格納
-    for day in [today, yesterday, day_before_yesterday]:
+    for day in days:
         display[day] = {}
         for time_of_day in ['morning', 'afternoon', 'evening']:
             time_label = day + "_" + time_of_day

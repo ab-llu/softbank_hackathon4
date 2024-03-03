@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -21,17 +21,26 @@
         <div class="home_content">
             <div class="header">
                 <div class="user-info"></div>
-                <h1>Smile Savvy</h1>
+                <h1>SmileSavvy</h1>
                 <div class="user-info">
                     <h4>{{ user }}</h4>
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
+            <h1>AIチャット</h1>
+            <h3>気になることがあれば、何でも聞いてください</h3>
             <div class="chat-container">
                 <div class="chat-messages">
                     <!-- メッセージ例 -->
-                    <div class="message user">こんにちは！</div>
-                    <div class="message bot">こんにちは、何かお手伝いできることはありますか？</div>
+                    <div class="message bot">
+                        [リマインド]<br>
+                        ハードバンク歯科の予約は明日16時からです。
+                    </div>
+                    <div class="message user">ハードバンク歯科の場所を教えてください</div>
+                    <div class="message bot">
+                        ハードバンク歯科の場所はこちらです<br>
+                        住所：東京都千代田区１－１
+                    </div>
                     <!-- 他のメッセージ -->
                 </div>
                 <div class="chat-input">
