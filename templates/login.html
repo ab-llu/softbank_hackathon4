@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>SmileSavvy Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <form action="" method="post">
-        <input type="text" name="user_id" placeholder="User Name">
-        <input type="submit" value="Login">
-    </form>
+<body class="login-bg">
+    <div class="login-container">
+        <h1>SmileSavvy</h1>
+        <p>歯磨きの習慣を変える、あなたのためのアプリ。</p>
+        <form action="/login" method="post">
+            <input type="text" id="user_id" name="user_id" placeholder="ユーザー名" required>
+            <input type="submit" value="今すぐ始める">
+        </form>
+    </div>
 </body>
 </html>

@@ -18,10 +18,16 @@
             <input type="date" id="dateInput" name="date" required>
             
             <label>時間帯:</label>
-            <select name="time_of_day" id="timeInput" required>
-                <option value="morning">朝</option>
-                <option value="afternoon">昼</option>
-                <option value="evening">夜</option>
+            <select name="number" id="timeInput" required>
+                {% if goal['first'] != '' %}
+                    <option value="first">１回目（{{ goal['first']}}時）</option>
+                {% endif %}
+                {% if 'second' in goal.keys() %}
+                    <option value="second">２回目（{{ goal['second']}}時）</option>
+                {% endif %}
+                {% if 'third' in goal.keys() %}
+                    <option value="third">３回目（{{ goal['third']}}時）</option>
+                {% endif %}
             </select>           
         </form>
         <div id="preview-container">
@@ -56,7 +62,7 @@
         }
 
         const day = "{{ day }}";
-        const time = "{{ time }}";
+        const number = "{{ number }}";
 
         // ページが読み込まれたときに実行
         document.addEventListener('DOMContentLoaded', function() {
@@ -64,8 +70,8 @@
             if (day) {
                 document.getElementById('dateInput').value = day;
             }
-            if (time) {
-                document.getElementById('timeInput').value = time;
+            if (number) {
+                document.getElementById('timeInput').value = number;
             }
         });
     </script>

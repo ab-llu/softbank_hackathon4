@@ -129,6 +129,16 @@ body {
     cursor: pointer;
 }
 
+.update-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
 #preview-container {
     display: flex;
     justify-content: center;
@@ -226,36 +236,69 @@ body {
     width: fit-content;
 }
 
-.toothbrush-container a:nth-child(2) {
+.three-times a:nth-child(2) {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 0%; /* 左端から */
 }  
 
-.toothbrush-container a:nth-child(3) {
+.three-times a:nth-child(3) {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 33.33%; /* 左端から1/3の位置 */
 }
 
-.toothbrush-container a:nth-child(4) {
+.three-times a:nth-child(4) {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 66.66%; /* 左端から2/3の位置 */
 }
 
-.label_morning {
+.twice a:nth-child(2) {
+    width: 50.00%; /* 画像の幅の1/3 */
+    left: 0%; /* 左端から */
+}  
+
+.twice a:nth-child(3) {
+    width: 50%; /* 画像の幅の1/3 */
+    left: 50%; /* 左端から1/3の位置 */
+}
+
+.once a {
+    width: 100%; /* 画像の幅の1/3 */
+    left: 0%; /* 左端から2/3の位置 */
+}
+
+.three-times .label_number_1 {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 0%; /* 左端から */
     text-align: center;
 }  
 
-.label_afternoon {
+.three-times .label_number_2 {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 33.33%; /* 左端から1/3の位置 */
     text-align: center;
 }
 
-.label_evening {
+.three-times .label_number_3 {
     width: 33.33%; /* 画像の幅の1/3 */
     left: 66.66%; /* 左端から2/3の位置 */
+    text-align: center;
+}
+
+.twice .label_number_1 {
+    width: 50%; /* 画像の幅の1/3 */
+    left: 0%; /* 左端から */
+    text-align: center;
+}  
+
+.twice .label_number_2 {
+    width: 50%; /* 画像の幅の1/3 */
+    left: 50%; /* 左端から1/3の位置 */
+    text-align: center;
+}
+
+.once .label_number_1 {
+    width: 100%; /* 画像の幅の1/3 */
+    left: 0%; /* 左端から2/3の位置 */
     text-align: center;
 }
 
@@ -264,7 +307,7 @@ body {
 }
 
 .yellow{
-    background-color: rgba(255, 255, 0, 0.2); 
+    background-color: rgba(255, 128, 0, 0.2); 
 }
 
 .green{
@@ -376,4 +419,114 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#length{
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.update-form {
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+.setting-container {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.setting-container a {
+    padding: 20px;
+    display: inline-block;
+    border-radius: 5px;
+    text-decoration: none; /* リンクの下線を消す */
+    font-weight: bold;
+}
+
+.login-container {
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-container h1 {
+    margin: 0 0 20px 0;
+    font-size: 100px;
+}
+
+.login-container p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"] {
+    margin-top: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-color: black;
+}
+
+.login-container input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-bg {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('background.jpg'); 
+    background-size: cover;
+    background-position: center center;
+}
+
+.login-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8); /* 白色の半透明のオーバーレイ */
+    z-index: 0;
+}
+
+/* コンテンツを疑似要素より前面に表示 */
+.login-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
+.user-setting {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.user-setting h4 {
+    margin-left: 20px;
+}
+
+.user-setting form {
+    margin-left: 30px;
+    font-size: 16px;
+    align-items: center;
+    gap: 10px;
+}
+
+.goal-setting {
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 50px;
 }

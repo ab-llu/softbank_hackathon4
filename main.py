@@ -30,6 +30,7 @@ app = Flask(__name__)
 app.secret_key = "jfwei938n329fn"
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = 'login'
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -54,7 +55,10 @@ def login():
     if request.method == 'POST':
         # ログイン処理（ここでは仮の処理を行います）
         user_id = request.form.get('user_id')
+        print(user_id)
         session['user'] = user_id
+        session['goal'] = {'first': 8}
+        session['length'] = 3
         user = User(user_id)
         login_user(user)
         return redirect(url_for('home'))
@@ -85,20 +89,17 @@ def home():
     date_string = now.strftime("%Y年%m月%d日")
     return render_template('home.html', date=date_string, user=session['user'])
 
-#記録
+#記録一覧
 @app.route('/record_list', methods=['GET', 'POST'])
 @login_required
 def record_list():
     now = datetime.now()
     date_string = now.strftime("%Y年%m月%d日")
     day_length = request.form.get('length', default=None, type=str) #フォームからとる
-    print(day_length)
-    if day_length is None:
-        day_length = 3
-    else:
-        day_length = int(day_length)
+    if day_length is not None:
+        session['length'] = int(day_length)
     days = []
-    for i in range(day_length):
+    for i in range(session['length']):
         days.append((now - timedelta(days=i)).strftime("%Y-%m-%d"))
     # today = now.strftime("%Y-%m-%d")
     # yesterday = (now - timedelta(days=1)).strftime("%Y-%m-%d")
@@ -106,14 +107,14 @@ def record_list():
     display = {} #ホーム画面表示用データ格納
     for day in days:
         display[day] = {}
-        for time_of_day in ['morning', 'afternoon', 'evening']:
-            time_label = day + "_" + time_of_day
+        for number in session['goal'].keys():
+            time_label = day + "_" + number
             if time_label in session['points'].keys():
-                display[day][time_of_day] = session['points'][time_label]
-                display[day][time_of_day]['json'] = json.dumps(session['points'][time_label])
+                display[day][number] = session['points'][time_label]
+                display[day][number]['json'] = json.dumps(session['points'][time_label])
             else:
-                display[day][time_of_day] = None
-    return render_template('record_list.html', points = session['points'], date=date_string, display=display, user=session['user'])
+                display[day][number] = None
+    return render_template('record_list.html', date=date_string, display=display, user=session['user'], goal=session['goal'], length=session['length'])
 
 #歯科予約
 @app.route('/reserve')
@@ -140,31 +141,47 @@ def learn():
     return render_template('learn.html', date=date_string, user=session['user'])
 
 #設定
-@app.route('/setting')
+@app.route('/setting', methods=['GET', 'POST'])
 @login_required
 def setting():
     now = datetime.now()
     date_string = now.strftime("%Y年%m月%d日")
-    return render_template('setting.html', date=date_string, user=session['user'])
+    if request.method == 'POST':
+        new_user_id = request.form.get('new_user_id')
+        if new_user_id is not None:
+            session['user'] = new_user_id
+            return redirect(url_for('setting'))
+        else:
+            first_brush = request.form.get('first_brush')
+            second_brush = request.form.get('second_brush')
+            third_brush = request.form.get('third_brush')
+            if first_brush is not None:
+                session['goal'] = {'first': int(first_brush)}
+                if second_brush != '': session['goal']['second'] = int(second_brush)
+                if third_brush != '': session['goal']['third'] = int(third_brush)
+            else:
+                return "No Data"
+
+    return render_template('setting.html', date=date_string, user=session['user'], goal=session['goal'])
 
 #画像アップロードページ
 @app.route('/upload_folder')
 @login_required
 def upload_form():
     day = request.args.get('day', default=None, type=str)
-    time = request.args.get('time', default=None, type=str)
-    print(day, time)
+    number = request.args.get('number', default=None, type=str)
 
     now = datetime.now()
     if day is None:
         day = now.strftime("%Y-%m-%d")
-    if time is None:
-        hour = now.hour
-        if 4 < hour < 11: time = "morning"
-        elif 10 < hour < 17: time = "afternoon"
-        else: time = "evening"
+    if number is None:
+        numer = 'first'
+        # hour = now.hour
+        # if 4 < hour < 11: time = "morning"
+        # elif 10 < hour < 17: time = "afternoon"
+        # else: time = "evening"
 
-    return render_template('upload.html', day=day, time=time)
+    return render_template('upload.html', day=day, number=number, goal=session['goal'])
 
 #記録表示ページ
 @app.route('/record', methods=['GET'])
@@ -190,8 +207,8 @@ def upload_image():
         return "No image selected for uploading"
     if file:
         date = request.form['date']
-        time_of_day = request.form['time_of_day']
-        time_label = date + "_" + time_of_day
+        number = request.form['number']
+        time_label = date + "_" + number
         _, file_extension = os.path.splitext(file.filename)
         filename = time_label + "_" + f"{uuid.uuid4()}{file_extension}"
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)

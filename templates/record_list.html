@@ -27,42 +27,107 @@
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data" class="upload-form">                
-                <label>表示日数:</label>
-                <select name="length" id="length" required>
-                    <option value="3">3</option>
-                    <option value="7">7</option>
-                    <option value="14">14</option>
-                </select>
-                <input type="submit" value="更新" class="submit-btn">           
-            </form>
-            <div class="toothbrush-container">
-                <div class="day_container">
-                    <div class="date transparent"><h3>2024-03-01</h3></div>
-                    <div class="toothbrush">
-                        <box class="label_morning"><h3>朝</h3></box>
-                        <box class="label_afternoon"><h3>昼</h3></box>
-                        <box class="label_evening"><h3>夜</h3></box>
-                    </div>
-                </div>
+            <h1>歯磨きの記録</h1>
+            <h3>歯ブラシのマークを押すと詳細が見えます</h3>
+            <div class="setting-container">
+                <form method="post" enctype="multipart/form-data" class="update-form">                
+                    <label>過去</label>
+                    <select name="length" id="length" required>
+                        <option value=3>3</option>
+                        <option value=7 {% if length==7 %}selected{% endif %}>7</option>
+                        <option value=14 {% if length==14 %}selected{% endif %}>14</option>
+                    </select>
+                    <label>日間の記録を表示　</label>
+                    <input type="submit" value="更新" class="update-btn">           
+                </form>
+                <a href="/setting">目標回数・時間を変更する</a>
             </div>
-            <div class="toothbrush-container">
-                {% for day in display.keys() %}
+
+            {% if goal.keys() | length == 3 %}
+                <div class="toothbrush-container three-times">
                     <div class="day_container">
-                        <div class="date"><h3>{{ day }}</h3></div>
+                        <div class="date transparent"><h3>2024-03-01</h3></div>
                         <div class="toothbrush">
-                            <img src="static/toothbrush.png">
-                            {% for time in display[day].keys() %}
-                                {% if display[day][time] == None %}
-                                    <a href="/upload_folder?day={{ day }}&time={{ time }}" title="新規登録" class="toothbrush-part"></a>
-                                {% else %}
-                                    <a href="/record?data={{ display[day][time]['json'] }}" title="記録を確認" class="{% if display[day][time]['point'] <= 82 %}toothbrush-part red{% elif display[day][time]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
-                                {% endif %}
+                            {% for number in goal.keys() %}
+                                <box class="label_number_{{ loop.index }}"><h3>{{ goal[number]}}時</h3></box>
                             {% endfor %}
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+                <div class="toothbrush-container three-times">
+                    {% for day in display.keys() %}
+                        <div class="day_container">
+                            <div class="date"><h3>{{ day }}</h3></div>
+                            <div class="toothbrush">
+                                <img src="static/toothbrush.png">
+                                {% for number in display[day].keys() %}
+                                    {% if display[day][number] == None %}
+                                        <a href="/upload_folder?day={{ day }}&number={{ number }}" title="新規登録" class="toothbrush-part"></a>
+                                    {% else %}
+                                        <a href="/record?data={{ display[day][number]['json'] }}" title="記録を確認" class="{% if display[day][number]['point'] <= 82 %}toothbrush-part red{% elif display[day][number]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% elif goal.keys() | length == 2 %}
+                <div class="toothbrush-container twice">
+                    <div class="day_container">
+                        <div class="date transparent"><h3>2024-03-01</h3></div>
+                        <div class="toothbrush">
+                            {% for number in goal.keys() %}
+                                <box class="label_number_{{ loop.index }}"><h3>{{ goal[number]}}時</h3></box>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="toothbrush-container twice">
+                    {% for day in display.keys() %}
+                        <div class="day_container">
+                            <div class="date"><h3>{{ day }}</h3></div>
+                            <div class="toothbrush">
+                                <img src="static/toothbrush.png">
+                                {% for number in display[day].keys() %}
+                                    {% if display[day][number] == None %}
+                                        <a href="/upload_folder?day={{ day }}&number={{ number }}" title="新規登録" class="toothbrush-part"></a>
+                                    {% else %}
+                                        <a href="/record?data={{ display[day][number]['json'] }}" title="記録を確認" class="{% if display[day][number]['point'] <= 82 %}toothbrush-part red{% elif display[day][number]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="toothbrush-container once">
+                    <div class="day_container">
+                        <div class="date transparent"><h3>2024-03-01</h3></div>
+                        <div class="toothbrush">
+                            {% for number in goal.keys() %}
+                                <box class="label_number_{{ loop.index }}"><h3>{{ goal[number]}}時</h3></box>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="toothbrush-container once">
+                    {% for day in display.keys() %}
+                        <div class="day_container">
+                            <div class="date"><h3>{{ day }}</h3></div>
+                            <div class="toothbrush">
+                                <img src="static/toothbrush.png">
+                                {% for number in display[day].keys() %}
+                                    {% if display[day][number] == None %}
+                                        <a href="/upload_folder?day={{ day }}&number={{ number }}" title="新規登録" class="toothbrush-part"></a>
+                                    {% else %}
+                                        <a href="/record?data={{ display[day][number]['json'] }}" title="記録を確認" class="{% if display[day][number]['point'] <= 82 %}toothbrush-part red{% elif display[day][number]['point'] <= 90 %}toothbrush-part yellow{% else %}toothbrush-part green{% endif %}"></a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </div>
 </body>

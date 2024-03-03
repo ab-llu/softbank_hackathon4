@@ -27,6 +27,55 @@
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
+            <div class="user-setting">
+                <h3>ユーザー設定</h3>
+                <h4>ユーザー名変更</h4>
+                <form action="/setting" method="post">
+                    <label for="new_user_id">新しいユーザー名:</label>
+                    <input type="text" id="new_user_id" name="new_user_id" required>
+                    <input type="submit" value="更新">
+                </form>
+            </div>
+            <div class="goal-setting">
+                <h3>目標設定</h3>
+                <form action="/setting" method="post">
+                    <div>
+                        <label for="first_brush">1回目の歯磨き時間:</label>
+                        <select name="first_brush" id="first_brush" required>
+                            {% for hour in range(0, 24) %}
+                            <option value="{{ hour }}" {% if hour==goal['first'] %}selected{% endif %}>{{ hour }}時</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="second_brush">2回目の歯磨き時間:</label>
+                        <select name="second_brush" id="second_brush">
+                            <option value="">なし</option>
+                            {% for hour in range(0, 24) %}
+                                {% if 'second' in goal.keys() %}
+                                    <option value="{{ hour }}" {% if hour==goal['second'] %}selected{% endif %}>{{ hour }}時</option>
+                                {% else %}
+                                    <option value="{{ hour }}">{{ hour }}時</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="third_brush">3回目の歯磨き時間:</label>
+                        <select name="third_brush" id="third_brush">
+                            <option value="">なし</option>
+                            {% for hour in range(0, 24) %}
+                                {% if 'third' in goal.keys() %}
+                                    <option value="{{ hour }}" {% if hour==goal['third'] %}selected{% endif %}>{{ hour }}時</option>
+                                {% else %}
+                                    <option value="{{ hour }}">{{ hour }}時</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="記録">
+                </form>
+            </div>
         </div>
     </div>
 </body>

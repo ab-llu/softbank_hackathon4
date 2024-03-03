@@ -31,14 +31,16 @@
                     <a href="{{ url_for('logout') }}">ログアウト</a>
                 </div>
             </div>
-            <h1>歯科予約</h1>
-            <h3>このページから、歯科を予約することができます。</h3>
-            <div id='calendar'></div>
-            <div id="popup" style="display:none;">
-                <div id="popup-content">
-                    <h3>予約しました</h3>
-                    <span id="date-info"></span><br><br>
-                    <button onclick="closePopup()">閉じる</button>
+            <div class="main">
+                <h1>歯科予約</h1>
+                <h3>このページから、歯科を予約することができます。</h3>
+                <div id='calendar'></div>
+                <div id="popup" style="display:none;">
+                    <div id="popup-content">
+                        <h3>予約しました</h3>
+                        <span id="date-info"></span><br><br>
+                        <button onclick="closePopup()">閉じる</button>
+                    </div>
                 </div>
             </div>
         </div>
